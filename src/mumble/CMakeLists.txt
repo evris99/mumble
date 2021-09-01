@@ -451,6 +451,11 @@ endif()
 
 find_pkg("SndFile;LibSndFile;sndfile" REQUIRED)
 
+# Check if sndfile version supports opus
+if(${sndfile_VERSION} STRGREATER_EQUAL "1.0.29")
+    add_compile_definitions(USE_SNDFILE_OPUS)
+endif()
+
 # Look for various targets as they are named differently on different platforms
 if(static AND TARGET sndfile-static)
 	target_link_libraries(mumble PRIVATE sndfile-static)
